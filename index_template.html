@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Site Info -->
-    <title>{{ name }} - Portfolio</title>
+    <title>{{ name }} - תיק עבודות</title>
     <meta name="description" content="{{ name }} - {{ summary }}">
     <meta name="author" content="{{ name }}">
 
@@ -111,14 +111,14 @@
         <main>
           {% if work_experience %}
             <section>
-              <h2 class="section-heading">Work Experience</h2>
+              <h2 class="section-heading">לימודים</h2>
               {% for job in work_experience %}
                 <section>
                   <h3>
                     {% if job.url %}
-                      {{ job.position }} at <a href="{{ job.url }}">{{ job.company }}</a>
+                      {{ job.position }} - <a href="{{ job.url }}">{{ job.company }}</a>
                     {% else %}
-                      {{ job.position }} at {{ job.company }}
+                      {{ job.position }} - {{ job.company }}
                     {% endif %}
                   </h3>
                   {% if job.start_date and job.end_date %}
@@ -137,7 +137,7 @@
 
           {% if projects %}
             <section>
-              <h2 class="section-heading">Projects</h2>
+              <h2 class="section-heading">פרויקטים</h2>
               {% for project in projects %}
                 <section>
                   <h3>
@@ -173,14 +173,14 @@
 
           {% if volunteer_experience %}
             <section>
-              <h2 class="section-heading">Volunteer Experience</h2>
+              <h2 class="section-heading">התנדבות</h2>
               {% for vol in volunteer_experience %}
                 <section>
                   <h3>
                     {% if vol.url %}
-                      {{ vol.position }} at <a href="{{ vol.url }}">{{ vol.organization }}</a>
+                      {{ vol.position }} ב<a href="{{ vol.url }}">{{ vol.organization }}</a>
                     {% else %}
-                      {{ vol.position }} at {{ vol.organization }}
+                      {{ vol.position }} ב{{ vol.organization }}
                     {% endif %}
                   </h3>
                   {% if vol.start_date and vol.end_date %}
@@ -199,7 +199,7 @@
 
           {% if references %}
             <section>
-              <h2 class="section-heading">References</h2>
+              <h2 class="section-heading">המלצות</h2>
               {% for ref in references %}
                 <section>
                   {% if ref.name %}<h3>{{ ref.name }}</h3>{% endif %}
@@ -219,7 +219,7 @@
         <aside>
           {% if education %}
             <section>
-              <h2 class="section-heading">Education</h2>
+              <h2 class="section-heading">השכלה</h2>
               {% for edu in education %}
                 <section>
                   <h3>
@@ -231,22 +231,22 @@
                   </h3>
                   {% if edu.location %}<p class="section-label">{{ edu.location }}</p>{% endif %}
                   {% if edu.degrees %}
-                    <h4>Degrees</h4>
+                    <h4>תארים</h4>
                     <ul>
                       {% for deg in edu.degrees %}<li>{{ deg }}</li>{% endfor %}
                     </ul>
                   {% endif %}
                   {% if edu.honors %}
-                    <h4>Honors</h4>
+                    <h4>הצטיינויות</h4>
                     <ul>
                       {% for hon in edu.honors %}<li>{{ hon }}</li>{% endfor %}
                     </ul>
                   {% endif %}
                   {% if edu.gpa_major or edu.gpa_cumulative or edu.graduation_date %}
                     <p>
-                      {% if edu.gpa_major %}<span class="block">GPA in Major: {{ edu.gpa_major }}</span>{% endif %}
-                      {% if edu.gpa_cumulative %}<span class="block">Cumulative GPA: {{ edu.gpa_cumulative }}</span>{% endif %}
-                      {% if edu.graduation_date %}<span class="block">Graduation Date: {{ edu.graduation_date }}</span>{% endif %}
+                      {% if edu.gpa_major %}<span class="block">ממוצע במקצוע ראשי: {{ edu.gpa_major }}</span>{% endif %}
+                      {% if edu.gpa_cumulative %}<span class="block">ממוצע כללי: {{ edu.gpa_cumulative }}</span>{% endif %}
+                      {% if edu.graduation_date %}<span class="block">תאריך סיום: {{ edu.graduation_date }}</span>{% endif %}
                     </p>
                   {% endif %}
                 </section>
@@ -256,7 +256,7 @@
 
           {% if skills %}
             <section>
-              <h2 class="section-heading">Skills</h2>
+              <h2 class="section-heading">מיומנויות</h2>
               <ul class="unstyled-list">
                 {% for skill in skills %}
                   <li>
@@ -278,7 +278,7 @@
 
           {% if languages %}
             <section>
-              <h2 class="section-heading">Languages</h2>
+              <h2 class="section-heading">שפות</h2>
               <ul class="unstyled-list">
                 {% for lang in languages %}
                   <li>
@@ -292,7 +292,7 @@
 
           {% if interests %}
             <section>
-              <h2 class="section-heading">Interests</h2>
+              <h2 class="section-heading">תחומי עניין</h2>
               {% for interest in interests %}
                 <section>
                   <h3>{{ interest.name }}</h3>
@@ -320,7 +320,7 @@
 
     <footer class="page-footer">
       <div class="container">
-        <p>© {{ current_year }} {{ name }}. All rights reserved.</p>
+        <p>© {{ current_year }} {{ name }}. כל הזכויות שמורות.</p>
       </div>
     </footer>
 

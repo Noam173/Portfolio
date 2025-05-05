@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Site Info -->
-    <title>{{ name }} - Resume</title>
+    <title>{{ name }} - קורות חיים</title>
     <meta name="description" content="{{ name }} - {{ summary }}">
     <meta name="author" content="{{ name }}">
 
@@ -89,14 +89,14 @@
         <main>
           {% if work_experience %}
             <section>
-              <h2 class="section-heading">Work Experience</h2>
+              <h2 class="section-heading">ניסיון תעסוקתי</h2>
               {% for job in work_experience %}
                 <section>
                   <h3>
                     {% if job.url %}
-                      {{ job.position }} at <a href="{{ job.url }}">{{ job.company }}</a>
+                      {{ job.position }} ב<a href="{{ job.url }}">{{ job.company }}</a>
                     {% else %}
-                      {{ job.position }} at {{ job.company }}
+                      {{ job.position }} ב{{ job.company }}
                     {% endif %}
                   </h3>
                   {% if job.start_date and job.end_date %}
@@ -115,7 +115,7 @@
 
           {% if projects %}
             <section>
-              <h2 class="section-heading">Projects</h2>
+              <h2 class="section-heading">פרויקטים</h2>
               {% for project in projects %}
                 <section>
                   <h3>
@@ -141,7 +141,7 @@
         <aside>
           {% if languages %}
             <section>
-              <h2 class="section-heading">Languages</h2>
+              <h2 class="section-heading">שפות</h2>
               <ul class="unstyled-list">
                 {% for lang in languages %}
                   <li>
@@ -155,14 +155,14 @@
 
           {% if volunteer_experience %}
             <section>
-              <h2 class="section-heading">Volunteer Experience</h2>
+              <h2 class="section-heading">התנדבות</h2>
               {% for vol in volunteer_experience %}
                 <section>
                   <h3>
                     {% if vol.url %}
-                      {{ vol.position }} at <a href="{{ vol.url }}">{{ vol.organization }}</a>
+                      {{ vol.position }} ב<a href="{{ vol.url }}">{{ vol.organization }}</a>
                     {% else %}
-                      {{ vol.position }} at {{ vol.organization }}
+                      {{ vol.position }} ב{{ vol.organization }}
                     {% endif %}
                   </h3>
                   {% if vol.start_date and vol.end_date %}
