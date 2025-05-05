@@ -153,29 +153,17 @@
             </section>
           {% endif %}
 
-          {% if volunteer_experience %}
+          {% if skills %}
             <section>
-              <h2 class="section-heading">התנדבות</h2>
-              {% for vol in volunteer_experience %}
-                <section>
-                  <h3>
-                    {% if vol.url %}
-                      {{ vol.position }} ב<a href="{{ vol.url }}">{{ vol.organization }}</a>
-                    {% else %}
-                      {{ vol.position }} ב{{ vol.organization }}
-                    {% endif %}
-                  </h3>
-                  {% if vol.start_date and vol.end_date %}
-                    <p class="section-label">{{ vol.start_date }} - {{ vol.end_date }}</p>
-                  {% endif %}
-                  {% if vol.summary %}<p>{{ vol.summary }}</p>{% endif %}
-                  {% if vol.highlights %}
-                    <ul>
-                      {% for highlight in vol.highlights %}<li>{{ highlight }}</li>{% endfor %}
-                    </ul>
-                  {% endif %}
-                </section>
-              {% endfor %}
+              <h2 class="section-heading">מיומנויות</h2>
+              <ul class="unstyled-list">
+                {% for skill in skills %}
+                  <li>
+                    <h3>{{ skill.name }}</h3>
+                    <p class="section-label">{{ skill.proficiency_label }}</p>
+                  </li>
+                {% endfor %}
+              </ul>
             </section>
           {% endif %}
         </aside>
