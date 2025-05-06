@@ -68,38 +68,46 @@
           <div class="header-info">
             <h1>{{ name }}</h1>
             {% if label %}<h2 class="header-label">{{ label }}</h2>{% endif %}
-            {% if contact.email or contact.phone or contact.location %}
-              <address>
+            <address>
+              <!-- First row: Email, phone, location -->
+              {% if contact.email or contact.phone or contact.location %}
                 <ul class="inline-list flex-responsive">
                   {% if contact.email %}
-                    <li>
-                      <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-                    </li>
+                    <li>{{ contact.email }}</li>
                   {% endif %}
                   {% if contact.phone %}
-                    <li>
-                      <a href="tel:+{{ contact.phone | replace('-', '') }}">{{ contact.phone }}</a>
-                    </li>
+                    <li>{{ contact.phone }}</li>
                   {% endif %}
-                  {% if contact.location %}<li>{{ contact.location }}</li>{% endif %}
+                  {% if contact.location %}
+                    <li>{{ contact.location }}</li>
+                  {% endif %}
                 </ul>
-              </address>
-            {% endif %}
-            {% if social_links %}
-              <ul class="inline-list flex-responsive">
-                {% for link in social_links %}
-                  <li>
-                    <a href="{{ link.url }}"
-                       rel="noopener noreferrer"
-                       aria-label="{{ link.label }}"
-                       class="link-with-icon">
+              {% endif %}
+              
+              <!-- Second row: ID and date of birth -->
+              {% if contact.id or contact.date_of_birth %}
+                <ul class="inline-list flex-responsive">
+                  {% if contact.id %}
+                    <li>ת.ז: {{ contact.id }}</li>
+                  {% endif %}
+                  {% if contact.date_of_birth %}
+                    <li>תאריך לידה: {{ contact.date_of_birth }}</li>
+                  {% endif %}
+                </ul>
+              {% endif %}
+              
+              <!-- Third row: GitHub and other social links -->
+              {% if social_links %}
+                <ul class="inline-list flex-responsive">
+                  {% for link in social_links %}
+                    <li>
                       {% if link.svg_data %}{{ link.svg_data | safe }}{% endif %}
                       {{ link.label }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </address>
             {% if summary %}<p class="header-summary">{{ summary }}</p>{% endif %}
           </div>
         </div>
@@ -113,24 +121,38 @@
             <section>
               <h2 class="section-heading">לימודים</h2>
               {% for job in work_experience %}
-                <section>
-                  <h3>
-                    {% if job.url %}
-                      {{ job.position }} - <a href="{{ job.url }}">{{ job.company }}</a>
-                    {% else %}
-                      {{ job.position }} - {{ job.company }}
-                    {% endif %}
-                  </h3>
-                  {% if job.start_date and job.end_date %}
-                    <p class="section-label">{{ job.start_date }} - {{ job.end_date }}</p>
-                  {% endif %}
-                  {% if job.summary %}<p>{{ job.summary }}</p>{% endif %}
-                  {% if job.highlights %}
-                    <ul>
-                      {% for highlight in job.highlights %}<li>{{ highlight }}</li>{% endfor %}
-                    </ul>
-                  {% endif %}
-                </section>
+              <section>
+                <h3>{{ job.position }} - {{ job.company }}</h3>
+                {% if job.start_date and job.end_date %}
+                  <p class="section-label">{{ job.start_date }} - {{ job.end_date }}</p>
+                {% endif %}
+                {% if job.summary %}<p>{{ job.summary }}</p>{% endif %}
+                {% if job.highlights %}
+                  <ul>
+                    {% for highlight in job.highlights %}<li>{{ highlight }}</li>{% endfor %}
+                  </ul>
+                {% endif %}
+              </section>
+              {% endfor %}
+            </section>
+          {% endif %}
+
+          {% if jobs %}
+            <section>
+              <h2 class="section-heading">ניסיון תעסוקתי</h2>
+              {% for job in jobs %}
+              <section>
+                <h3>{{ job.position }} - {{ job.company }}</h3>
+                {% if job.start_date and job.end_date %}
+                  <p class="section-label">{{ job.start_date }} - {{ job.end_date }}</p>
+                {% endif %}
+                {% if job.summary %}<p>{{ job.summary }}</p>{% endif %}
+                {% if job.highlights %}
+                  <ul>
+                    {% for highlight in job.highlights %}<li>{{ highlight }}</li>{% endfor %}
+                  </ul>
+                {% endif %}
+              </section>
               {% endfor %}
             </section>
           {% endif %}
@@ -140,13 +162,7 @@
               <h2 class="section-heading">פרויקטים</h2>
               {% for project in projects %}
                 <section>
-                  <h3>
-                    {% if project.url %}
-                      <a href="{{ project.url }}">{{ project.title }}</a>
-                    {% else %}
-                      {{ project.title }}
-                    {% endif %}
-                  </h3>
+                  <h3>{{ project.title }}</h3>
                   {% if project.summary %}<p>{{ project.summary }}</p>{% endif %}
                   {% if project.highlights %}
                     <ul>
@@ -180,13 +196,7 @@
               <h2 class="section-heading">השכלה</h2>
               {% for edu in education %}
                 <section>
-                  <h3>
-                    {% if edu.url %}
-                      <a href="{{ edu.url }}">{{ edu.institution }}</a>
-                    {% else %}
-                      {{ edu.institution }}
-                    {% endif %}
-                  </h3>
+                  <h3>{{ edu.institution }}</h3>
                   {% if edu.location %}<p class="section-label">{{ edu.location }}</p>{% endif %}
                   {% if edu.degrees %}
                     <h4>תארים</h4>
@@ -267,6 +277,46 @@
                         </figure>
                       {% endfor %}
                     </div>
+                  {% endif %}
+                </section>
+              {% endfor %}
+            </section>
+          {% endif %}
+
+          {% if volunteer_experience %}
+            <section>
+              <h2 class="section-heading">התנדבות</h2>
+              {% for vol in volunteer_experience %}
+                <section>
+                  <h3>{{ vol.position }} ב{{ vol.organization }}</h3>
+                  {% if vol.start_date and vol.end_date %}
+                    <p class="section-label">{{ vol.start_date }} - {{ vol.end_date }}</p>
+                  {% endif %}
+                  {% if vol.summary %}<p>{{ vol.summary }}</p>{% endif %}
+                  {% if vol.highlights %}
+                    <ul>
+                      {% for highlight in vol.highlights %}<li>{{ highlight }}</li>{% endfor %}
+                    </ul>
+                  {% endif %}
+                </section>
+              {% endfor %}
+            </section>
+          {% endif %}
+
+          {% if hobbies %}
+            <section>
+              <h2 class="section-heading">תחביבים</h2>
+              {% for hobby in hobbies %}
+                <section>
+                  <h3>{{ hobby.position }} {{ hobby.organization }}</h3>
+                  {% if hobby.start_date and hobby.end_date %}
+                    <p class="section-label">{{ hobby.start_date }} - {{ hobby.end_date }}</p>
+                  {% endif %}
+                  {% if hobby.summary %}<p>{{ hobby.summary }}</p>{% endif %}
+                  {% if hobby.highlights %}
+                    <ul>
+                      {% for highlight in hobby.highlights %}<li>{{ highlight }}</li>{% endfor %}
+                    </ul>
                   {% endif %}
                 </section>
               {% endfor %}
